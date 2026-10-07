@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apeli - Aku Peduli Lingkungan</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f1f8f4;
+      color: #183b2a;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #087f5b, #20a36a);
+      color: white;
+      padding: 18px 8%;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: #d8ff65;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #d8ff65;
+    }
+
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 40px 8%;
+      background:
+        linear-gradient(rgba(0,80,50,0.65), rgba(0,60,40,0.75)),
+        url("https://images.unsplash.com/photo-1497250681960-ef046c08a56e?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .hero h2 {
+      font-size: 30px;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #d8ff65;
+      color: #164b31;
+      padding: 13px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: white;
+    }
+
+    section {
+      padding: 70px 8%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 35px;
+      color: #087f5b;
+    }
+
+    .section-title p {
+      color: #557064;
+      margin-top: 8px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 18px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-7px);
+    }
+
+    .card .icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      color: #087f5b;
+      margin-bottom: 10px;
+    }
+
+    .info-box {
+      background: #dff5e8;
+      border-left: 6px solid #087f5b;
+      padding: 25px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    .danger {
+      background: #fff0f0;
+      border-left-color: #e63946;
+    }
+
+    .ocean {
+      background: #e8f7ff;
+      border-left-color: #168aad;
+    }
+
+    .tips {
+      counter-reset: tips;
+    }
+
+    .tip {
+      background: white;
+      margin-bottom: 15px;
+      padding: 20px;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .number {
+      background: #087f5b;
+      color: white;
+      min-width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+
+    #quiz {
+      background: #e3f5eb;
+    }
+
+    .quiz-container {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .question {
+      background: white;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 15px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+    }
+
+    .question h3 {
+      margin-bottom: 15px;
+      color: #087f5b;
+    }
+
+    .option {
+      display: block;
+      padding: 10px;
+      margin: 8px 0;
+      background: #f3f7f5;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .option:hover {
+      background: #d9f1e4;
+    }
+
+    .result {
+      text-align: center;
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 12px;
+      background: white;
+      display: none;
+    }
+
+    footer {
+      background: #123c2a;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    footer strong {
+      color: #d8ff65;
+    }
+
+    @media (max-width: 700px) {
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .hero h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <nav>
+      <div class="logo">🌱 Apeli <span>• Aku Peduli Lingkungan</span></div>
+
+      <ul>
+        <li><a href="#beranda">Beranda</a></li>
+        <li><a href="#sampah">Jenis Sampah</a></li>
+        <li><a href="#deforestasi">Deforestasi</a></li>
+        <li><a href="#laut">Sampah Laut</a></li>
+        <li><a href="#tips">Tips</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero" id="beranda">
+    <div class="hero-content">
+      <h1>🌱 APELI</h1>
+
+      <h2>Aku Peduli Lingkungan</h2>
+
+      <p>
+        Mari belajar mengenal lingkungan, memahami masalah sampah
+        dan deforestasi, serta melakukan tindakan kecil untuk menjaga
+        bumi kita.
+      </p>
+
+      <a href="#sampah" class="btn">Mulai Belajar 🌍</a>
+    </div>
+  </section>
+
+
+  <!-- JENIS SAMPAH -->
+  <section id="sampah">
+    <div class="section-title">
+      <h2>🗑️ Jenis-Jenis Sampah</h2>
+      <p>Kenali sampah agar kita dapat mengelolanya dengan benar.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🍌</div>
+        <h3>Sampah Organik</h3>
+        <p>
+          Sampah yang berasal dari makhluk hidup dan dapat terurai secara
+          alami.
+        </p>
+        <br>
+        <strong>Contoh:</strong>
+        <p>Daun, sisa makanan, kulit buah, dan ranting.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🥤</div>
+        <h3>Sampah Anorganik</h3>
+        <p>
+          Sampah yang sulit terurai secara alami dan membutuhkan waktu
+          sangat lama untuk terurai.
+        </p>
+        <br>
+        <strong>Contoh:</strong>
+        <p>Plastik, kaca, kaleng, dan beberapa jenis kemasan.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">☣️</div>
+        <h3>Sampah B3</h3>
+        <p>
+          Sampah yang mengandung bahan berbahaya atau beracun sehingga
+          membutuhkan penanganan khusus.
+        </p>
+        <br>
+        <strong>Contoh:</strong>
+        <p>Baterai, lampu tertentu, dan bahan kimia rumah tangga.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">♻️</div>
+        <h3>Sampah Daur Ulang</h3>
+        <p>
+          Sampah yang masih dapat dimanfaatkan kembali melalui proses
+          penggunaan ulang atau daur ulang.
+        </p>
+        <br>
+        <strong>Contoh:</strong>
+        <p>Kardus, botol plastik, kaleng, dan kertas.</p>
+      </div>
+
+    </div>
+
+    <div class="info-box">
+      <h3>💡 Tahukah Kamu?</h3>
+      <p>
+        Memilah sampah sejak dari rumah membantu sampah yang masih
+        bernilai untuk digunakan kembali atau didaur ulang.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- DEFORESTASI -->
+  <section id="deforestasi">
+    <div class="section-title">
+      <h2>🌳 Deforestasi</h2>
+      <p>Apa yang terjadi ketika hutan terus kehilangan pepohonannya?</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🌲</div>
+        <h3>Apa itu deforestasi?</h3>
+        <p>
+          Deforestasi adalah hilangnya atau berkurangnya tutupan hutan
+          akibat perubahan penggunaan lahan maupun aktivitas manusia.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏗️</div>
+        <h3>Penyebab</h3>
+        <p>
+          Pembukaan lahan, pembangunan, perkebunan, pertambangan,
+          penebangan pohon, serta kebakaran hutan dapat menyebabkan
+          berkurangnya hutan.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐒</div>
+        <h3>Dampak terhadap hewan</h3>
+        <p>
+          Hilangnya hutan dapat menyebabkan habitat hewan berkurang
+          sehingga mengganggu kehidupan berbagai spesies.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌡️</div>
+        <h3>Dampak terhadap iklim</h3>
+        <p>
+          Hutan berperan dalam menyerap karbon dan membantu menjaga
+          keseimbangan ekosistem. Kehilangan hutan dapat memperburuk
+          masalah perubahan iklim.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="info-box danger">
+      <h3>⚠️ Mengapa kita harus peduli?</h3>
+      <p>
+        Hutan bukan hanya kumpulan pohon. Hutan merupakan tempat hidup
+        berbagai makhluk hidup dan memiliki peran penting bagi manusia
+        serta keseimbangan lingkungan.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- SAMPAH LAUT -->
+  <section id="laut">
+    <div class="section-title">
+      <h2>🌊 Sampah di Laut</h2>
+      <p>Sampah yang kita buang sembarangan dapat berakhir di laut.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">🐢</div>
+        <h3>Ancaman bagi hewan laut</h3>
+        <p>
+          Sampah dapat membahayakan hewan laut jika tertelan atau
+          menyebabkan mereka terjebak.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧴</div>
+        <h3>Sampah plastik</h3>
+        <p>
+          Plastik yang masuk ke lingkungan dapat bertahan sangat lama
+          dan dapat terfragmentasi menjadi potongan-potongan kecil.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌊</div>
+        <h3>Mengganggu ekosistem</h3>
+        <p>
+          Sampah laut dapat mengganggu habitat dan kualitas lingkungan
+          tempat berbagai organisme hidup.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">♻️</div>
+        <h3>Solusinya</h3>
+        <p>
+          Kurangi penggunaan barang sekali pakai, gunakan kembali barang
+          yang masih layak, dan buang serta pilah sampah dengan benar.
+        </p>
+      </div>
+
+    </div>
+
+    <div class="info-box ocean">
+      <h3>🌏 Ingat!</h3>
+      <p>
+        Sampah yang dibuang di daratan dapat terbawa oleh angin,
+        saluran air, sungai, dan akhirnya menuju laut.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- TIPS -->
+  <section id="tips">
+    <div class="section-title">
+      <h2>♻️ Cara Mengurangi Sampah</h2>
+      <p>Perubahan besar bisa dimulai dari kebiasaan kecil.</p>
+    </div>
+
+    <div class="tips">
+
+      <div class="tip">
+        <div class="number">1</div>
+        <div>
+          <h3>Gunakan botol minum sendiri</h3>
+          <p>
+            Membawa botol minum dapat membantu mengurangi penggunaan
+            botol plastik sekali pakai.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="number">2</div>
+        <div>
+          <h3>Bawa tas belanja</h3>
+          <p>
+            Gunakan tas belanja yang dapat dipakai berulang kali.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="number">3</div>
+        <div>
+          <h3>Kurangi barang sekali pakai</h3>
+          <p>
+            Pilih barang yang dapat digunakan berkali-kali.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="number">4</div>
+        <div>
+          <h3>Pilah sampah</h3>
+          <p>
+            Pisahkan sampah sesuai jenisnya agar lebih mudah dikelola.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="number">5</div>
+        <div>
+          <h3>Gunakan kembali barang</h3>
+          <p>
+            Sebelum membuang sesuatu, pikirkan apakah barang tersebut
+            masih dapat digunakan kembali.
+          </p>
+        </div>
+      </div>
+
+      <div class="tip">
+        <div class="number">6</div>
+        <div>
+          <h3>Jangan membuang sampah sembarangan</h3>
+          <p>
+            Buang sampah pada tempatnya dan ikut menjaga lingkungan
+            di sekitar kita.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="section-title">
+      <h2>🧠 Quiz Lingkungan</h2>
+      <p>Uji pengetahuanmu tentang lingkungan!</p>
+    </div>
+
+    <div class="quiz-container">
+
+      <div class="question">
+        <h3>1. Manakah yang termasuk sampah organik?</h3>
+
+        <label class="option">
+          <input type="radio" name="q1" value="0">
+          Botol plastik
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="1">
+          Kulit buah
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="0">
+          Kaleng
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q1" value="0">
+          Kaca
+        </label>
+      </div>
+
+
+      <div class="question">
+        <h3>2. Apa yang dimaksud dengan deforestasi?</h3>
+
+        <label class="option">
+          <input type="radio" name="q2" value="1">
+          Hilangnya atau berkurangnya tutupan hutan
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="0">
+          Penanaman banyak pohon
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="0">
+          Membersihkan sungai
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q2" value="0">
+          Membuat taman
+        </label>
+      </div>
+
+
+      <div class="question">
+        <h3>3. Mengapa sampah plastik berbahaya bagi laut?</h3>
+
+        <label class="option">
+          <input type="radio" name="q3" value="0">
+          Karena membuat air laut menjadi manis
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="1">
+          Karena dapat membahayakan hewan dan ekosistem laut
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="0">
+          Karena plastik membuat ikan tumbuh besar
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q3" value="0">
+          Karena plastik membuat laut menjadi lebih dalam
+        </label>
+      </div>
+
+
+      <div class="question">
+        <h3>4. Manakah tindakan yang dapat mengurangi sampah?</h3>
+
+        <label class="option">
+          <input type="radio" name="q4" value="0">
+          Menggunakan barang sekali pakai sebanyak mungkin
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="1">
+          Membawa botol minum sendiri
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="0">
+          Membuang sampah ke sungai
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q4" value="0">
+          Membakar semua sampah
+        </label>
+      </div>
+
+
+      <div class="question">
+        <h3>5. Apa manfaat hutan bagi lingkungan?</h3>
+
+        <label class="option">
+          <input type="radio" name="q5" value="0">
+          Menghilangkan semua hewan
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="1">
+          Menjadi habitat berbagai makhluk hidup
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="0">
+          Menghasilkan sampah plastik
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q5" value="0">
+          Membuat udara semakin kotor
+        </label>
+      </div>
+
+
+      <div class="question">
+        <h3>6. Apa yang sebaiknya dilakukan sebelum membuang barang?</h3>
+
+        <label class="option">
+          <input type="radio" name="q6" value="0">
+          Langsung membuangnya
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q6" value="1">
+          Memikirkan apakah barang tersebut masih bisa digunakan kembali
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q6" value="0">
+          Membuangnya ke sungai
+        </label>
+
+        <label class="option">
+          <input type="radio" name="q6" value="0">
+          Membakarnya
+        </label>
+      </div>
+
+
+      <button class="btn" onclick="checkQuiz()">
+        Lihat Nilai 🎯
+      </button>
+
+      <div class="result" id="result"></div>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <p>🌱 <strong>APELI</strong> — Aku Peduli Lingkungan</p>
+    <p>Belajar hari ini, jaga bumi untuk masa depan. 🌏</p>
+  </footer>
+
+
+  <script>
+
+    function checkQuiz() {
+
+      let score = 0;
+      let total = 6;
+
+      for (let i = 1; i <= total; i++) {
+
+        let answer = document.querySelector(
+          'input[name="q' + i + '"]:checked'
+        );
+
+        if (answer && answer.value === "1") {
+          score++;
+        }
+      }
+
+      let percentage = Math.round((score / total) * 100);
+
+      let message = "";
+
+      if (percentage === 100) {
+        message = "🌟 Luar biasa! Kamu sangat peduli terhadap lingkungan!";
+      }
+      else if (percentage >= 80) {
+        message = "👏 Hebat! Pengetahuan lingkunganmu sangat baik!";
+      }
+      else if (percentage >= 60) {
+        message = "👍 Bagus! Terus belajar tentang lingkungan!";
+      }
+      else if (percentage >= 40) {
+        message = "🌱 Lumayan! Yuk, pelajari materi Apeli lagi!";
+      }
+      else {
+        message = "💚 Jangan menyerah! Belajar lagi dan coba quiz ini!";
+      }
+
+      let result = document.getElementById("result");
+
+      result.style.display = "block";
+
+      result.innerHTML = `
+        <h2>Hasil Quiz</h2>
+        <p style="font-size:25px; margin:10px;">
+          <strong>${score} / ${total}</strong>
+        </p>
+        <p>Nilai: <strong>${percentage}</strong></p>
+        <p>${message}</p>
+      `;
+
+      result.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+  </script>
+
+</body>
+</html>
